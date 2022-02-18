@@ -1,0 +1,17 @@
+# dependencies
+node_modules
+
+# testing
+coverage
+
+# truffle
+build
+
+# environment variables
+.env
+
+
+Microsoft-template/node_modules
+Microsoft-template/coverage
+Microsoft-template/build
+Microsoft-template/.env
