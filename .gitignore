@@ -11,7 +11,7 @@ build
 .env
 
 
-Microsoft-template/node_modules
-Microsoft-template/coverage
-Microsoft-template/build
-Microsoft-template/.env
+microsoft_template/node_modules
+microsoft_template/coverage
+microsoft_template/build
+microsoft_template/.env
