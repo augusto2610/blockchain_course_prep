@@ -2,6 +2,25 @@
 //Import solidity version
 pragma solidity ^0.8.7;
 
-contract Rental {
-    
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+
+contract Rental is Ownable {
+    // The person who pay the rent
+    address private tenant;
+    // The person who owns the place and receive an amount for rent it
+    address private locator;
+
+    uint16 private rentDuration;
+
+    event OnSetRentDuration(string message, uint16 duration);
+
+    function setRentDuration(uint16 duration) public onlyOwner {
+        rentDuration = duration;
+        emit OnSetRentDuration("Duration is: ", duration);
+    }
+
+    function getRentDuration() public view returns(uint16) {
+        return rentDuration;
+    }
 }
