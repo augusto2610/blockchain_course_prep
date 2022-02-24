@@ -22,3 +22,4 @@ ap_home_rental/artifacts
 ap_home_rental/coverage
 ap_home_rental/build
 ap_home_rental/.env
+ap_home_rental/cache
