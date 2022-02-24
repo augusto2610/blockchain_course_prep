@@ -15,3 +15,10 @@ microsoft_template/node_modules
 microsoft_template/coverage
 microsoft_template/build
 microsoft_template/.env
+
+
+ap_home_rental/node_modules
+ap_home_rental/artifacts
+ap_home_rental/coverage
+ap_home_rental/build
+ap_home_rental/.env

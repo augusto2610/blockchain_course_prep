@@ -1,0 +1,40 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "/Users/APinto/projects/apinto/blockchain/solidity/blockchain_course_prep/ap_home_rental/contracts/Rental.sol": {
+      "lastModificationDate": 1645670287766,
+      "contentHash": "969619127669c2fa1c59c01ffd3e37d3",
+      "sourceName": "contracts/Rental.sol",
+      "solcConfig": {
+        "version": "0.8.7",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.7"
+      ],
+      "artifacts": [
+        "Rental"
+      ]
+    }
+  }
+}
