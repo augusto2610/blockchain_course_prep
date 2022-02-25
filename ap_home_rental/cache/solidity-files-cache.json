@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/APinto/projects/apinto/blockchain/solidity/blockchain_course_prep/ap_home_rental/contracts/Rental.sol": {
-      "lastModificationDate": 1645675469725,
-      "contentHash": "2b95823091095b4097080d7f7acf02f8",
+      "lastModificationDate": 1645742981756,
+      "contentHash": "727f85d4d550f93cab6d48c9ab9f3c30",
       "sourceName": "contracts/Rental.sol",
       "solcConfig": {
         "version": "0.8.7",

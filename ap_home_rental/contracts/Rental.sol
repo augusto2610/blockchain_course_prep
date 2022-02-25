@@ -14,6 +14,8 @@ contract Rental is Ownable {
     uint16 private rentDuration;
 
     event OnSetRentDuration(string message, uint16 duration);
+    event OnTenantSaved(string message, address tenant);
+    event onLocatorSaved(string message, address locator);
 
     function setRentDuration(uint16 duration) public onlyOwner {
         rentDuration = duration;
@@ -22,5 +24,23 @@ contract Rental is Ownable {
 
     function getRentDuration() public view returns(uint16) {
         return rentDuration;
+    }
+
+    function setTenant(address tenantAddress) public onlyOwner {
+        tenant = tenantAddress;
+        emit OnTenantSaved("Tenant saved:" , tenant);
+    }
+
+    function getTenant() public view returns(address) {
+        return tenant;
+    }
+
+    function setLocator(address locatorAddress) public onlyOwner {
+        locator = locatorAddress;
+        emit onLocatorSaved("Locator saved: ", locator);
+    }
+
+    function getLocator() public onlyOwner view returns (address) {
+        return locator;
     }
 }
