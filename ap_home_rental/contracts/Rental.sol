@@ -3,6 +3,7 @@
 pragma solidity ^0.8.7;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "hardhat/console.sol";
 
 
 contract Rental is Ownable {
@@ -19,6 +20,7 @@ contract Rental is Ownable {
 
     function setRentDuration(uint16 duration) public onlyOwner {
         rentDuration = duration;
+        console.log("setting duration");
         emit OnSetRentDuration("Duration is: ", duration);
     }
 
@@ -27,6 +29,7 @@ contract Rental is Ownable {
     }
 
     function setTenant(address tenantAddress) public onlyOwner {
+        require(tenantAddress.balance > 0, "Tenant balance should be grather than 0");
         tenant = tenantAddress;
         emit OnTenantSaved("Tenant saved:" , tenant);
     }
