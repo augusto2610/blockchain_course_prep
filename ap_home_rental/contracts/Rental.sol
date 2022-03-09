@@ -40,10 +40,15 @@ contract Rental is Ownable {
 
     function setLocator(address locatorAddress) public onlyOwner {
         locator = locatorAddress;
+        transferOwnership(locator);
         emit onLocatorSaved("Locator saved: ", locator);
     }
 
-    function getLocator() public onlyOwner view returns (address) {
+    function getLocator() public view returns (address) {
         return locator;
+    }
+
+    function getOwner() public view returns(address) {
+        return this.owner();
     }
 }

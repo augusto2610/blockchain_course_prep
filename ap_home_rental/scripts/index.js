@@ -9,10 +9,19 @@ async function main() {
 
     // setup contract
     // The address is where the contract was deployed.
-    const contractAddress = '0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6';
+    const contractAddress = '0xa513E6E4b8f2a923D98304ec87F64353C4D5C853';
     // Get the contract object
     const contract = await ethers.getContractFactory('Rental');
     const rentalContract = contract.attach(contractAddress);
+
+    await hre.network.provider.request({
+        method: "hardhat_impersonateAccount",
+        params: ["0x14dC79964da2C08b23698B3D3cc7Ca32193d9955"],
+    });
+
+    const signers = await ethers.getSigner("0x14dC79964da2C08b23698B3D3cc7Ca32193d9955");
+    console.log("contract signers: " + signers.address);
+    await signers.sendTransaction()
 
     
     //await rentalContract.setRentDuration(15);
@@ -21,7 +30,7 @@ async function main() {
 
 
     // Save the tenant - the person who pay the rent
-    await rentalContract.setTenant(bobAddress);
+    //await rentalContract.setTenant(bobAddress);
     const tenant = await rentalContract.getTenant();
     console.log("Tenant address: " + tenant);
 
@@ -31,6 +40,9 @@ async function main() {
     console.log("Locator address: " + locator);
     
     await getRealStateBalance();
+
+    const contractOwner = await rentalContract.getOwner();
+    console.log("Contract Owner: " + contractOwner);
 }
 
 async function showAccountsList() {
