@@ -2,47 +2,40 @@ const { ethers } = require("hardhat");
 
 async function main() {
     
-    await showAccountsList();
+    //await showAccountsList();
 
     const bobAddress = await showAddressDetails("Bob", 14);
     const johnAddress = await showAddressDetails("John", 7);
 
     // setup contract
     // The address is where the contract was deployed.
-    const contractAddress = '0xa513E6E4b8f2a923D98304ec87F64353C4D5C853';
+    const contractAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
     // Get the contract object
     const contract = await ethers.getContractFactory('Rental');
     const rentalContract = contract.attach(contractAddress);
-
-    await hre.network.provider.request({
-        method: "hardhat_impersonateAccount",
-        params: ["0x14dC79964da2C08b23698B3D3cc7Ca32193d9955"],
-    });
-
-    const signers = await ethers.getSigner("0x14dC79964da2C08b23698B3D3cc7Ca32193d9955");
-    console.log("contract signers: " + signers.address);
-    await signers.sendTransaction()
-
     
     //await rentalContract.setRentDuration(15);
     const rentDuration = await rentalContract.getRentDuration();
-    console.log("Rent duration: " + rentDuration)
+    console.log("Rent duration: " + rentDuration + " months")
 
 
     // Save the tenant - the person who pay the rent
-    //await rentalContract.setTenant(bobAddress);
     const tenant = await rentalContract.getTenant();
-    console.log("Tenant address: " + tenant);
+    if(tenant != 0) {
+        console.log("Tenant address: " + tenant);
+    } else {
+        await rentalContract.setTenant(bobAddress);
+    }
 
     // Save the locator - the house owner
     //await rentalContract.setLocator(johnAddress);
-    const locator = await rentalContract.getLocator();
+    /*const locator = await rentalContract.getLocator();
     console.log("Locator address: " + locator);
     
     await getRealStateBalance();
 
     const contractOwner = await rentalContract.getOwner();
-    console.log("Contract Owner: " + contractOwner);
+    console.log("Contract Owner: " + contractOwner);*/
 }
 
 async function showAccountsList() {

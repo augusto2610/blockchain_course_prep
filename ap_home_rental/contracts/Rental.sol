@@ -3,10 +3,10 @@
 pragma solidity ^0.8.7;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "hardhat/console.sol";
-
 
 contract Rental is Ownable {
+    // TODO make some test to finish v0.1
+
     // The person who pay the rent
     address private tenant;
     // The person who owns the place and receive an amount for rent it
@@ -14,14 +14,13 @@ contract Rental is Ownable {
 
     uint16 private rentDuration;
 
-    event OnSetRentDuration(string message, uint16 duration);
-    event OnTenantSaved(string message, address tenant);
-    event onLocatorSaved(string message, address locator);
+    event OnSetRentDuration(uint16 duration);
+    event OnTenantSaved(address tenant);
+    event onLocatorSaved(address locator);
 
     function setRentDuration(uint16 duration) public onlyOwner {
         rentDuration = duration;
-        console.log("setting duration");
-        emit OnSetRentDuration("Duration is: ", duration);
+        emit OnSetRentDuration(duration);
     }
 
     function getRentDuration() public view returns(uint16) {
@@ -30,8 +29,9 @@ contract Rental is Ownable {
 
     function setTenant(address tenantAddress) public onlyOwner {
         require(tenantAddress.balance > 0, "Tenant balance should be grather than 0");
+        require(tenantAddress != locator, "Tenant cannot be the same address than locator");
         tenant = tenantAddress;
-        emit OnTenantSaved("Tenant saved:" , tenant);
+        emit OnTenantSaved(tenant);
     }
 
     function getTenant() public view returns(address) {
@@ -41,7 +41,7 @@ contract Rental is Ownable {
     function setLocator(address locatorAddress) public onlyOwner {
         locator = locatorAddress;
         transferOwnership(locator);
-        emit onLocatorSaved("Locator saved: ", locator);
+        emit onLocatorSaved(locator);
     }
 
     function getLocator() public view returns (address) {
@@ -50,5 +50,10 @@ contract Rental is Ownable {
 
     function getOwner() public view returns(address) {
         return this.owner();
+    }
+
+    function payRent() public payable {
+        (bool sent, bytes memory data) = locator.call{value: msg.value}("");
+        require(sent, "Failed to send ethers");
     }
 }
